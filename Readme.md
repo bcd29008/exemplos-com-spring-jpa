@@ -15,7 +15,7 @@ Para cada um dos exemplos disponíveis neste repositório foi feito uso do [Spri
 1. Gerar o projeto em https://start.spring.io/
    1. Project: gradle
    2. Language: Java
-   3. Spring boot: 2.6.3
+   3. Spring boot: 2.7.1
    4. Project metadata: 
        - group: engtelecom.bcd
        - packaging: jar
@@ -56,10 +56,13 @@ Com o projeto criado e com as informações de conexão com MySQL definidas é h
 
 1. [Relacionamento um-para-um](exemplo-01-um-para-um)
 2. [Relacionamento um-para-muitos](exemplo-02-um-para-muitos/)
-3. [Relacionamento muitos-para-muitos](exemplo-03-muitos-para-muitos/)
+3. [Relacionamento muitos-para-muitos a partir de um banco de dados existente](exemplo-03-muitos-para-muitos/)
+4. [Relacionamento muitos-para-muitos - exemplo de uma Livraria](exemplo-04-muitos-para-muitos-livraria/)
 
 
 ## Referências
+
+- https://www.datafaker.net/documentation/getting-started/
 - https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html
 - https://spring.io/guides
 - https://spring.io/guides/gs/accessing-data-mysql/
@@ -68,6 +71,7 @@ Com o projeto criado e com as informações de conexão com MySQL definidas é h
 - https://docs.spring.io/spring-boot/docs/2.6.3/reference/htmlsingle/#boot-features-spring-mvc-template-engines
 - https://www.oracle.com/technical-resources/articles/javase/persistenceapi.html
 - https://www.baeldung.com/jpa-many-to-many
+- https://www.baeldung.com/jpa-persisting-enums-in-jpa
 - https://attacomsian.com/blog
 - http://querydsl.com/
 - https://www.oracle.com/corporate/features/project-lombok.html
