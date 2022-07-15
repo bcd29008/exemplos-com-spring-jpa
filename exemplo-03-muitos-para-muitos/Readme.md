@@ -14,34 +14,6 @@ Neste exemplo temos um modelo que relacionamentos muitos-para-muitos, um-para-mu
 
 ![jobs schema](jobs-er-model.png)
 
-## Biblioteca Lombok
-
-Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
-
-Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA.
-
-### Adicionando dependência no `build.gradle`
-
-Adicione as linhas abaixo dentro da seção de dependências no arquivo [build.gradle](build.gradle):
-
-```groovy
-compileOnly 'org.projectlombok:lombok:1.18.22'
-annotationProcessor 'org.projectlombok:lombok:1.18.22'
-
-testCompileOnly 'org.projectlombok:lombok:1.18.22'
-testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
-```
-
-### Adicionando plugins ou extensões em sua IDE
-
-- **IntelliJ**
-  - Vá em `File->Settings->Plugins`
-  - Clique em `Browse repositories`
-  - Procure por `Lombok plugin` e instale
-  - Reinicie a IDE
-- **Visual Studio Code**
-  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
-
 ## Consultas personalizadas com Query Annotation
 
 No [Exemplo 02](../exemplo-02-um-para-muitos/Readme.md) deste repositório foi apresentado alguns exemplos para derivar métodos de consultas com Spring Data JPA. Neste diretório encontrará exemplo de consultas personalizadas usando a anotação `@Query` para fazer consultas SQL nativas (no caso, com o MySQL) e consultas com [*Java Persistence Query Language* (JPQL)](https://docs.oracle.com/cd/E12839_01/apirefs.1111/e13946/ejb3_langref.html).
@@ -57,6 +29,23 @@ Definida como parte da JPA, a JPQL é uma linguagem de consulta orientada a obje
 // @Query(value = "SELECT * FROM employee e WHERE MONTH(e.dob) = ?1", nativeQuery = true)
 List<Employee> findByAniversariantesNoMes(int mes);
 ```
+
+## Biblioteca Lombok
+
+Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
+
+Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA e remover o plugin do lombok no arquivo [build.gradle](build.gradle).
+
+### Adicionand extensão em sua IDE para suporte ao Lombok
+
+- **IntelliJ**
+  - Vá em `File->Settings->Plugins`
+  - Clique em `Browse repositories`
+  - Procure por `Lombok plugin` e instale
+  - Reinicie a IDE
+- **Visual Studio Code**
+  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
+
 
 ## Executando o projeto
 

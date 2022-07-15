@@ -1,6 +1,5 @@
 # Exemplo JPA com um relacionamento um-para-um
 
-
 Editar o arquivo [src/main/java/resources/application.properties](src/main/java/resources/application.properties) e incluir as informações sobre a conexão com o servidor MySQL.
    ```properties
     spring.jpa.hibernate.ddl-auto=update

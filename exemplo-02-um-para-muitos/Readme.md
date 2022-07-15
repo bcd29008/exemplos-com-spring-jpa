@@ -12,34 +12,6 @@ Editar o arquivo [src/main/java/resources/application.properties](src/main/java/
 
 A propriedade `spring.jpa.hibernate.ddl-auto` deve ser deixada com o valor `update` na primeira vez que for executar a aplicação. Isso fará com que as tabelas sejam criadas no MySQL. Uma vez que o modelo não mude mais, então seria interessante trocar de `update` para `none` e assim evitar que as tabelas sejam modificadas nas execuções subsequentes da aplicação.
 
-## Biblioteca Lombok
-
-Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
-
-Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA.
-
-### Adicionando dependência no `build.gradle`
-
-Adicione as linhas abaixo dentro da seção de dependências no arquivo [build.gradle](build.gradle):
-
-```groovy
-compileOnly 'org.projectlombok:lombok:1.18.22'
-annotationProcessor 'org.projectlombok:lombok:1.18.22'
-
-testCompileOnly 'org.projectlombok:lombok:1.18.22'
-testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
-```
-
-### Adicionando plugins ou extensões em sua IDE
-
-- **IntelliJ**
-  - Vá em `File->Settings->Plugins`
-  - Clique em `Browse repositories`
-  - Procure por `Lombok plugin` e instale
-  - Reinicie a IDE
-- **Visual Studio Code**
-  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
-
 ## Modelo
 
 Abaixo é apresentado do diagrama ER do modelo relacional do exemplo presente neste diretório. Trata-se de um exemplo simples para permitir observar como os atributos das classes Java serão mapeados para as colunas em uma tabela no MySQL e como criar um relacionamento um-para-muitos de Campus para Curso, que com JPA também requer que na classe Curso seja criado uma anotação muitos-para-um.
@@ -72,7 +44,21 @@ int countByCampus(Campus campus)
 
 Outros exemplos foram colocados no arquivo [CursoRepository.java](src/main/java/engtelecom/bcd/repository/CursoRepository.java).
 
+## Biblioteca Lombok
 
+Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
+
+Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA e remover o plugin do lombok no arquivo [build.gradle](build.gradle).
+
+### Adicionand extensão em sua IDE para suporte ao Lombok
+
+- **IntelliJ**
+  - Vá em `File->Settings->Plugins`
+  - Clique em `Browse repositories`
+  - Procure por `Lombok plugin` e instale
+  - Reinicie a IDE
+- **Visual Studio Code**
+  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
 
 ## Executando o projeto
 
