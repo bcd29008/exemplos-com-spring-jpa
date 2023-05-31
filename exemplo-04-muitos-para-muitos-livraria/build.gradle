@@ -1,37 +1,35 @@
 plugins {
-	id "io.freefair.lombok" version "6.5.0.3"
-	id 'org.springframework.boot' version '2.7.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'java'
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id "io.freefair.lombok" version "8.0.1"
 }
 
 group = 'engtelecom.bcd'
-version = '1.0'
-sourceCompatibility = '11'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
+
 dependencies {
-	// Biblioteca Para gerar dados aleatórios (i.e. nome de pessoa, endereço, etc.)
-	// https://www.datafaker.net/documentation/getting-started/
-	implementation 'net.datafaker:datafaker:1.4.0'
+    // Biblioteca Para gerar dados aleatórios (i.e. nome de pessoa, endereço, etc.)
+    // https://mvnrepository.com/artifact/net.datafaker/datafaker
+    implementation 'net.datafaker:datafaker:1.9.0'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
 
-	runtimeOnly 'mysql:mysql-connector-java'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+bootRun {
+    environment 'spring.output.ansi.console-available', true
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    
+    useJUnitPlatform()
 }

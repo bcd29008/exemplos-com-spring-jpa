@@ -2,7 +2,6 @@ package engtelecom.bcd.repository;
 
 import java.util.List;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 
 import engtelecom.bcd.entities.Campus;

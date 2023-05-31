@@ -2,7 +2,9 @@
 
 
 
-Este repositório apresenta pequenos exemplos com o *framework* [Spring](https://spring.io) para persistir dados em um banco de dados MySQL. Nos exemplos é feito uso do [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference) que faz uso de padrões de projeto [**Repository**](https://java-design-patterns.com/patterns/repository/) e [**Data Access Objects** (DAO)](https://java-design-patterns.com/patterns/dao/) e é baseado na especificação [**Java Persistence API** (JPA2)]((https://www.oracle.com/java/technologies/persistence-jsp.html)), usada por *frameworks* que fazem o mapeamento objeto-relacional ([*Object-Relational Mapping* - ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)).
+Este repositório apresenta pequenos exemplos com o *framework* [Spring](https://spring.io) para persistir dados em um banco de dados MySQL. 
+
+Nos exemplos é feito uso do [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference) que faz uso de padrões de projeto [**Repository**](https://java-design-patterns.com/patterns/repository/) e [**Data Access Objects** (DAO)](https://java-design-patterns.com/patterns/dao/) e é baseado na especificação [**Java Persistence API** (JPA2)]((https://www.oracle.com/java/technologies/persistence-jsp.html)), usada por *frameworks* que fazem o mapeamento objeto-relacional ([*Object-Relational Mapping* - ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)).
 
 ## Como criar o projeto Java
 
@@ -13,13 +15,13 @@ Com o Spring Boot não é necessário fazer qualquer configuração em arquivos 
 Para cada um dos exemplos disponíveis neste repositório foi feito uso do [Spring Initializr](https://start.spring.io/) para criar o esqueleto do projeto. Se deseja criar um projeto como foi criado aqui, então siga os passos abaixo (Se estiver com o IntelliJ Ultimate, então é possível criar o projeto por lá sem a necessidade de ir para o *site* do Spring):
 
 1. Gerar o projeto em https://start.spring.io/
-   1. Project: gradle
+   1. Project: gradle - groovy
    2. Language: Java
-   3. Spring boot: 2.7.1
+   3. Spring boot: 3.1.0
    4. Project metadata: 
        - group: engtelecom.bcd
        - packaging: jar
-       - java: 11
+       - java: 17
    5. Dependências:
       1. Spring Data JPA
       2. MySQL Driver

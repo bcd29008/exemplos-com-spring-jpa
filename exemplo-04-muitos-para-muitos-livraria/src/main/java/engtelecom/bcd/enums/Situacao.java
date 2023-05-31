@@ -9,22 +9,24 @@ import lombok.Getter;
 @Getter
 public enum Situacao {
 
-    ANALISE(1,"Em análise"), 
-    APROVADO(2,"Aprovado"), 
-    TRANSITO(3,"Em trânsito"), 
-    ENTREGUE(4,"Entregue");
+    ANALISE(1, "Em análise"),
+    APROVADO(2, "Aprovado"),
+    TRANSITO(3, "Em trânsito"),
+    ENTREGUE(4, "Entregue");
 
     private int codigo;
     private String nome;
 
     /**
      * Obtendo o Enum associado ao código
+     * 
      * @param codSituacao código informado
-     * @return Enum 
+     * @return Enum
      */
-    public static Situacao of(int codSituacao){
+    public static Situacao of(int codSituacao) {
         // Poderia fazer um foreach no lugar do código abaixo
-        return Stream.of(Situacao.values()).filter(s->s.getCodigo()==codSituacao).findFirst().orElseThrow(IllegalArgumentException::new);
+        return Stream.of(Situacao.values()).filter(s -> s.getCodigo() == codSituacao).findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     @Override

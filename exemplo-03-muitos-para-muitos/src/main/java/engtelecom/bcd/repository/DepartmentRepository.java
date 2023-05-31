@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import engtelecom.bcd.entities.Department;
 
-public interface DepartmentRepository extends CrudRepository<Department, Integer>{
-    
+public interface DepartmentRepository extends CrudRepository<Department, Integer> {
+
 }

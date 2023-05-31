@@ -1,11 +1,15 @@
 package engtelecom.bcd.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import engtelecom.bcd.entities.Pessoa;
 
 /**
- * The goal of the Spring Data repository abstraction is to significantly reduce the amount of boilerplate code required to implement data access layers for various persistence stores.
+ * The goal of the Spring Data repository abstraction is to significantly reduce
+ * the amount of boilerplate code required to implement data access layers for
+ * various persistence stores.
  * 
  * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories
  * 
@@ -14,28 +18,35 @@ import engtelecom.bcd.entities.Pessoa;
  * 
  * <S extends T> S save(S entity); // para persistir no BD a entidade
  *
- *  Optional<T> findById(ID primaryKey); // para obter uma entidade que possua um determinado ID
+ * Optional<T> findById(ID primaryKey); // para obter uma entidade que possua um
+ * determinado ID
  * 
- *  Iterable<T> findAll(); para retornar todas entidades
+ * Iterable<T> findAll(); para retornar todas entidades
  * 
- *  long count();  // para retornar o total de entidades
+ * long count(); // para retornar o total de entidades
  * 
  * void delete(T entity); // para excluir uma entidade
  * 
- *  boolean existsById(ID primaryKey); // para verificar se existe uma entidade com determinado ID
+ * boolean existsById(ID primaryKey); // para verificar se existe uma entidade
+ * com determinado ID
  * 
  */
-public interface PessoaRepository extends CrudRepository<Pessoa, Integer>{
+public interface PessoaRepository extends CrudRepository<Pessoa, Integer> {
 
     /*
-        É possível criar consultas personalizadas apenas declarando os nomes dos métodos nesta interface
-        e sem a necessidade de implementá-los. O Spring faz isso por ti. Só é necessário seguir algumas
-        regras para os nomes dos métodos. Veja mais em:
+     * É possível criar consultas personalizadas apenas declarando os nomes dos
+     * métodos nesta interface
+     * e sem a necessidade de implementá-los. O Spring faz isso por ti. Só é
+     * necessário seguir algumas
+     * regras para os nomes dos métodos. Veja mais em:
+     * 
+     * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#
+     * repositories.query-methods.query-creation
+     * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#appendix.
+     * query.method.subject
+     * 
+     */
 
-        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation
-        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#appendix.query.method.subject
+    List<Pessoa> findByCpf(String cpf);
 
-    */
-    Pessoa findByCpf(String cpf);
-    
 }

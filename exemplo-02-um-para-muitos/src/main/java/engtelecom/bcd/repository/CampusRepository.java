@@ -1,5 +1,7 @@
 package engtelecom.bcd.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import engtelecom.bcd.entities.Campus;
@@ -36,7 +38,7 @@ public interface CampusRepository extends CrudRepository<Campus, Long>{
         https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#appendix.query.method.subject
 
     */
-    Campus findBySigla(String sigla);
+    Optional<Campus> findBySigla(String sigla);
 
 
     

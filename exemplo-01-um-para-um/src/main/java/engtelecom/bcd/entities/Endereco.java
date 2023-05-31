@@ -2,20 +2,21 @@ package engtelecom.bcd.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  * 
  * POJO para representar uma entidade Endereco.
  * 
- * É necessário que a classe tem getter/setter, construtor padrão, construtor com parâmetros, toString, hashCode() e equals(). Use a IDE para gerar isso para você ou faça uso do projeto Lombok (https://projectlombok.org).
+ * É necessário que a classe tem getter/setter, construtor padrão, construtor
+ * com parâmetros, toString, hashCode() e equals(). Use a IDE para gerar isso
+ * para você ou faça uso do projeto Lombok (https://projectlombok.org).
  */
 @Entity
 public class Endereco implements Serializable{
@@ -23,7 +24,9 @@ public class Endereco implements Serializable{
     /**
      * A anotação Id indica que o atributo é a chave primária da entidade
      * 
-     * A anotação GeneratedValue indica a estratégia para geração dos valores da chave primário ao criar uma nova entidade. No exemplo abaixo a chave primária será configurada no MySQL com AUTOINCREMENT
+     * A anotação GeneratedValue indica a estratégia para geração dos valores da
+     * chave primário ao criar uma nova entidade. No exemplo abaixo a chave primária
+     * será configurada no MySQL com AUTOINCREMENT
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,35 +37,49 @@ public class Endereco implements Serializable{
     private String estado;
     private String cep;
 
-
     /**
-     * A anotação OneToOne serve para indicar o relacionamento um-para-um entre as entidades. Em relacionamento bidirecionais é necessário especificar esta anotação em ambas as entidades (como foi feito neste exemplo), porém somente uma das entidades será a dona da associação (indicada pela propriedade mappedBy).
+     * A anotação OneToOne serve para indicar o relacionamento um-para-um entre as
+     * entidades. Em relacionamento bidirecionais é necessário especificar esta
+     * anotação em ambas as entidades (como foi feito neste exemplo), porém somente
+     * uma das entidades será a dona da associação (indicada pela propriedade
+     * mappedBy).
      * 
      * 
-     * A propriedade fetch indica a estratégia para obtenção dos dados de uma entidade associada. A estratégia padrão é EAGER e indica que ao obter uma entidade, todas as entidades relacionadas também são obtidas do banco. A estratégia LAZY só traz as entidades relacionadas quando for necessário.
+     * A propriedade fetch indica a estratégia para obtenção dos dados de uma
+     * entidade associada. A estratégia padrão é EAGER e indica que ao obter uma
+     * entidade, todas as entidades relacionadas também são obtidas do banco. A
+     * estratégia LAZY só traz as entidades relacionadas quando for necessário.
      * 
      * A propriedade optional indica se o relacionamento é opcional ou não.
      * 
-     * A anotação JoinColumn é usada para especificar o nome da chave estrangeira na entidade dona do relacionamento (no caso, esta entidade). No lado inverso (na entidade Pessoa) é feito uso da propriedade mappedBy para indicar que o relacionamento é mapeado por outra entidade.
+     * A anotação JoinColumn é usada para especificar o nome da chave estrangeira na
+     * entidade dona do relacionamento (no caso, esta entidade). No lado inverso (na
+     * entidade Pessoa) é feito uso da propriedade mappedBy para indicar que o
+     * relacionamento é mapeado por outra entidade.
      * 
-     * A propriedade name indica qual será o nome da coluna da chave estrangeira e a propriedade nullable indica se é permitido valores nulos na chave estrangeira
+     * A propriedade name indica qual será o nome da coluna da chave estrangeira e a
+     * propriedade nullable indica se é permitido valores nulos na chave estrangeira
      * 
-     * OneToOne irá criar uma restrição UNIQUE no campo id_pessoa da tabela endereço. Ou seja, isso vai garantir que não será possível ter mais de uma pessoa associada ao mesmo endereço
+     * OneToOne irá criar uma restrição UNIQUE no campo id_pessoa da tabela
+     * endereço. Ou seja, isso vai garantir que não será possível ter mais de uma
+     * pessoa associada ao mesmo endereço
      */
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_pessoa", nullable = false)
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
     /**
      * É obrigatório ter um construtor padrão, porém este pode ser protected.
      */
-    protected Endereco(){}
+    protected Endereco() {
+    }
 
-    public Endereco(String rua, String cidade, String estado, String cep) {
+    public Endereco(String rua, String cidade, String estado, String cep, Pessoa p) {
         this.rua = rua;
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
+        this.pessoa = p;
     }
 
     public Integer getIdEndereco() {
@@ -144,8 +161,4 @@ public class Endereco implements Serializable{
         return true;
     }
 
-    
-
-    
-    
 }

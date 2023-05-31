@@ -2,8 +2,7 @@ package engtelecom.bcd.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Embeddable
-public class EdicaoId implements Serializable{
+public class EdicaoId implements Serializable {
 
     private Integer numero;
     private Integer idLivro;

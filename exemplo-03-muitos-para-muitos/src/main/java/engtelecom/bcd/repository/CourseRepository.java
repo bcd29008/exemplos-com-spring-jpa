@@ -14,5 +14,5 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     // Fazendo de parâmetro nomeados.
     @Query("SELECT c FROM Course c WHERE YEAR(c.cdate) = :ano")
     List<Course> findByCursosRealizadosEmUmAno(@Param("ano") int ano);
-    
+
 }
