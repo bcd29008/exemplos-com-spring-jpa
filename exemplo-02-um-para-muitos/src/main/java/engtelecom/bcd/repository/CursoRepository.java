@@ -2,33 +2,26 @@ package engtelecom.bcd.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import engtelecom.bcd.entities.Campus;
 import engtelecom.bcd.entities.Curso;
 
+
 /**
- * The goal of the Spring Data repository abstraction is to significantly reduce the amount of boilerplate code required to implement data access layers for various persistence stores.
+ * Rather than return everything from a large result set, Spring Data REST recognizes some URL parameters that influence the page size and the starting page number.
+ * If you extend PagingAndSortingRepository<T, ID> and access the list of all entities, you get links to the first 20 entities. 
  * 
- * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories
+ * https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting
  * 
- * Métodos herdados da interface CrudRepository
- * https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
- * 
- * <S extends T> S save(S entity); // para persistir no BD a entidade
- *
- *  Optional<T> findById(ID primaryKey); // para obter uma entidade que possua um determinado ID
- * 
- *  Iterable<T> findAll(); para retornar todas entidades
- * 
- *  long count();  // para retornar o total de entidades
- * 
- * void delete(T entity); // para excluir uma entidade
- * 
- *  boolean existsById(ID primaryKey); // para verificar se existe uma entidade com determinado ID
  * 
  */
-public interface CursoRepository extends CrudRepository<Curso, Long> {
+@RepositoryRestResource(collectionResourceRel = "cursos", path = "cursos")
+public interface CursoRepository extends PagingAndSortingRepository<Curso, Long>, CrudRepository<Curso, Long> {
 
     /*
         É possível criar consultas personalizadas apenas declarando os nomes dos métodos nesta interface
@@ -45,18 +38,17 @@ public interface CursoRepository extends CrudRepository<Curso, Long> {
     */
 
     // Listar todos os cursos que possuam o nome informado como parâmetro
-    List<Curso> findByNome(String nomeDoCurso);
+    Page<Curso> findByNome(String nomeDoCurso, Pageable pageable);
 
     // Listar todos os cursos que possuam o nome informado como parâmetro, porém sem que os nomes sejam repetidos e não sensível a caixa (alta ou baixa)
-    List<Curso> findDistinctByNomeIgnoreCase(String nomeDoCurso);
+    Page<Curso> findDistinctByNomeIgnoreCase(String nomeDoCurso, Pageable pageable);
 
     // Listar todos os cursos que possuam o nome informado como parâmetro e que seja ordenado pelo nome
     // se colocar Desc no final no nome do método então será ordem decrescente
-    List<Curso> findByNomeContainingOrderByNome(String nomeDoCurso);
+    Page<Curso> findByNomeContainingOrderByNome(String nomeDoCurso, Pageable pageable);
 
     // Contar o total de cursos do campus informado como parâmetro
     int countByCampus(Campus campus);
-
 
     // Combinando múltiplos critérios
     List<Curso> findByCampusAndCargaHoraria(Campus campus, int cargaHoraria);
@@ -65,20 +57,20 @@ public interface CursoRepository extends CrudRepository<Curso, Long> {
     List<Curso> findByCargaHorariaIsNull();
 
     // Listando os cursos cujo nome inicia com uma String (i.e. Engenharia)
-    List<Curso> findByNomeStartingWith(String prefixo);
+    Page<Curso> findByNomeStartingWith(String prefixo, Pageable pageable);
 
     // Listando os cursos cujo nome termina com uma String (i.e. Telecomunicações)
-    List<Curso> findByNomeEndingWith(String sufixo);
+    Page<Curso> findByNomeEndingWith(String sufixo, Pageable pageable);
 
     // Listando os cursos cujo nome contém uma String (i.e. tele)
-    List<Curso> findByNomeContaining(String padrao);
+    Page<Curso> findByNomeContaining(String padrao, Pageable pageable);
 
     // Listando os cursos que possuam carga horária maior que o valor informado
     // Para menor seria LessThan, menor igual LessThanEqual
-    List<Curso> findByCargaHorariaGreaterThan(int valor);
+    Page<Curso> findByCargaHorariaGreaterThan(int valor, Pageable pageable);
 
     // Listando todos os cursos cuja carga horário esteja entre os valores informados
-    List<Curso> findByCargaHorariaBetween(int inicio, int fim);
+    Page<Curso> findByCargaHorariaBetween(int inicio, int fim, Pageable pageable);
 
     // Apagando curso por nome
     void deleteByNome(String nome);

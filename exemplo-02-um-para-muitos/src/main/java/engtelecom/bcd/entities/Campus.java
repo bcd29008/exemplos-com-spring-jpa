@@ -1,8 +1,9 @@
 package engtelecom.bcd.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,9 +60,17 @@ public class Campus implements Serializable{
      * 
      * Em relacionamento bidirecionais é necessário especificar esta anotação em ambas as entidades (como foi feito neste exemplo), porém somente uma das entidades será a dona da associação (indicada pela propriedade mappedBy). Em mappedBy coloca-se o identificador do mapeamento que deverá aparecer como atributo
      * da classe Curso
+     * 
+     * Atributo cascade (boa prática de pai para filho apenas) pode assumir alguns valores (CascadeType.ALL ativa todos). Detalhes de alguns:
+     * CascadeType.PERSIST - entidades filhas serão persistidas assim que a entidade pai for persistida no banco de dados
+     * CascadeType.MERGE - quando a entidade pai sofrer alterações e essas forem mescladas no contexto de persistência, as entidades filhas também serão
+     * CascadeType.REMOVE - ao excluir a entidade pai, a entidade filha também é excluída
+     * CascadeType.REFRESH - ao atualizar a entidade pai a partir do banco de dados, a entidade filha também é atualizada a partir do banco
+     * 
+     * 
      */
-    @OneToMany(mappedBy = "campus")
-    private Set<Curso> cursos;
+    @OneToMany(mappedBy = "campus", cascade = {CascadeType.ALL})
+    private List<Curso> cursos;
 
     /**
      * Construtor para criar uma entidade Campus. Não é necessário informar o id, pois este será 

@@ -1,8 +1,10 @@
 package engtelecom.bcd.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import engtelecom.bcd.entities.Campus;
 
@@ -27,6 +29,7 @@ import engtelecom.bcd.entities.Campus;
  *  boolean existsById(ID primaryKey); // para verificar se existe uma entidade com determinado ID
  * 
  */
+@RepositoryRestResource(collectionResourceRel = "campus", path = "campus")
 public interface CampusRepository extends CrudRepository<Campus, Long>{
 
     /*
@@ -40,6 +43,7 @@ public interface CampusRepository extends CrudRepository<Campus, Long>{
     */
     Optional<Campus> findBySigla(String sigla);
 
+    List<Campus> findByNome(String nome);
 
     
 }

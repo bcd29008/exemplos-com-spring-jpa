@@ -6,6 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import engtelecom.bcd.entities.Campus;
 import engtelecom.bcd.entities.Curso;
@@ -26,17 +29,14 @@ public class ExemploJpaApplication {
 
     public static void main(String[] args) {
         // Método run para executar a aplicação. É necessário passar como parâmetro uma
-        // classe que
-        // tenha a anotação de aplicação e, neste caso, que tenha uma Bean para executar
-        // um cliente em
-        // linha de comando
+        // classe que tenha a anotação de aplicação e, neste caso, que tenha uma Bean
+        // para executar um cliente em linha de comando
         SpringApplication.run(ExemploJpaApplication.class, args);
         log.info("Aplicação finalizada");
     }
 
     // Este método será invocado assim que a aplicação for executada. Como parâmetro
-    // pode-se passar
-    // todas as interfaces que herdam de Repository
+    // pode-se passar todas as interfaces que herdam de Repository
     @Bean
     public CommandLineRunner demoUmParaMuitos(CampusRepository campusRepository, CursoRepository cursoRepository) {
         return (args) -> {
@@ -70,7 +70,11 @@ public class ExemploJpaApplication {
                 // Listando todos os cursos que possuem carga horária maior que 4000. Está sendo
                 // feito uso do method reference para percorrer a lista ao invés de fazer um
                 // foreach como foi feito acima.
-                cursoRepository.findByCargaHorariaGreaterThan(4000).forEach(System.out::println);
+                //
+                // Indicando que quer pegar a página 1, com 20 elementos, ordenado pelo campo
+                // nome de forma crescente
+                Pageable pagina = PageRequest.of(0, 20, Sort.by("nome").ascending());
+                cursoRepository.findByCargaHorariaGreaterThan(4000, pagina).forEach(System.out::println);
 
                 // Listando total de cursos no campus São José
                 Optional<Campus> buscaCampus = campusRepository.findBySigla("SJE");
