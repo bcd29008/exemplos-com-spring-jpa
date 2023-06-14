@@ -67,7 +67,7 @@ public interface CampusRepository extends CrudRepository<Campus, Long>{
 public interface CursoRepository extends PagingAndSortingRepository<Curso, Long>, CrudRepository<Curso, Long> {
 ```
 
-Assim, nas consultar personalizadas será necessário acrescentar um parâmetro do tipo `Pageable` e o tipo de retorno deverá ser do tipo `Page` ou `Slice` e não do tipo `List`. Exemplos:
+Assim, nas consultas personalizadas será necessário acrescentar um parâmetro do tipo `Pageable` e o tipo de retorno deverá ser do tipo `Page` ou `Slice` e não do tipo `List`. Exemplos:
 
 ```java
 // Listando os cursos cujo nome inicia com uma String (i.e. Engenharia)
