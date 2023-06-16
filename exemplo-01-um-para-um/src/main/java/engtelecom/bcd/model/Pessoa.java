@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -49,6 +49,11 @@ public class Pessoa implements Serializable {
 
     private String email;
 
+    /**
+     * A propriedade unique serve para indicar se o JPA deve ou não criar uma
+     * restrição UNIQUE no banco de dados. Da forma que foi feita, não será permitido
+     * que mais de uma pessoa tenha o mesmo CPF.
+     */
     @Column(nullable = false, unique = true)
     private String cpf;
 
@@ -67,6 +72,9 @@ public class Pessoa implements Serializable {
      * A propriedade cascade indica se operações em cascata devem ser aplicadas na
      * entidade associada. Por exemplo, ao excluir uma pessoa deve-se excluir em
      * cascata o endereço?
+     *
+     * Na propriedade mappedBy é obrigatório informar um nome exatamente igual ao nome do
+     * atributo que foi criado na classe Endereço para representar o relacionamento One-To-One.
      */
     @OneToOne(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Endereco endereco;

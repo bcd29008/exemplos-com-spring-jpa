@@ -8,7 +8,7 @@ No arquivo [application.properties](src/main/resources/application.properties) �
 spring.jpa.hibernate.ddl-auto=none
 ```
 
-Para executar este exemplo é necessário que você tenha um servidor MySQL com um esquema criado a partir do arquivo [jobs-schema.sql](jobs-schema.sql) disponível neste repositório. 
+Para executar este exemplo é necessário que você tenha um [servidor MySQL](../Readme.md#servidor-mysql) com um esquema criado a partir do arquivo [jobs-schema.sql](jobs-schema.sql) disponível neste repositório. 
 
 Neste exemplo temos um modelo que relacionamentos muitos-para-muitos, um-para-muitos e uma chave primária composta (duas colunas), sendo que uma das colunas também é chave estrangeira.
 
@@ -30,22 +30,10 @@ Definida como parte da JPA, a JPQL é uma linguagem de consulta orientada a obje
 List<Employee> findByAniversariantesNoMes(int mes);
 ```
 
+
 ## Biblioteca Lombok
 
-Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
-
-Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA e remover o plugin do lombok no arquivo [build.gradle](build.gradle).
-
-### Adicionand extensão em sua IDE para suporte ao Lombok
-
-- **IntelliJ**
-  - Vá em `File->Settings->Plugins`
-  - Clique em `Browse repositories`
-  - Procure por `Lombok plugin` e instale
-  - Reinicie a IDE
-- **Visual Studio Code**
-  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
-
+Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/), [veja mais detalhes aqui](../Readme.md#biblioteca-lombok).
 
 ## Executando o projeto
 

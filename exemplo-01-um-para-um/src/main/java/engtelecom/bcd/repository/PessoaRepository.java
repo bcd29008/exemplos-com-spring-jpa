@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import engtelecom.bcd.entities.Pessoa;
+import engtelecom.bcd.model.Pessoa;
 
 /**
  * The goal of the Spring Data repository abstraction is to significantly reduce

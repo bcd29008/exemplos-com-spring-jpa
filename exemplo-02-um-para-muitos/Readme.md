@@ -4,18 +4,11 @@ Abaixo é apresentado do diagrama ER do modelo relacional do exemplo presente ne
 
 ![Diagrama ER](campus-curso.png)
 
-## Configurações da conexão
+## Configuração do Spring para conexão com o banco de dados MySQL 
 
-Editar o arquivo [src/main/java/resources/application.properties](src/main/java/resources/application.properties) e incluir as informações sobre a conexão com o servidor MySQL.
-```properties
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_database
-spring.datasource.username=nome-do-usuario
-spring.datasource.password=senha-do-usuario
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```
 
-A propriedade `spring.jpa.hibernate.ddl-auto` deve ser deixada com o valor `update` na primeira vez que for executar a aplicação. Isso fará com que as tabelas sejam criadas no MySQL. Uma vez que o modelo não mude mais, então seria interessante trocar de `update` para `none` e assim evitar que as tabelas sejam modificadas nas execuções subsequentes da aplicação.
+Editar o arquivo [src/main/java/resources/application.properties](src/main/java/resources/application.properties) e incluir as informações sobre a conexão com o servidor MySQL [conforme indicado aqui](../Readme.md#configuração-do-spring-para-conexão-com-o-banco-de-dados-mysql).
+
 
 ## Derivando métodos de consultas com Spring Data JPA
 
@@ -87,19 +80,7 @@ Page<Curso> findByNomeStartingWith(String prefixo, Pageable pageable);
 
 ## Biblioteca Lombok
 
-Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get` e `set`. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
-
-Caso não queira usar a biblioteca Lombok, então basta gerar os métodos obrigatórios para cada entidade JPA e remover o plugin do lombok no arquivo [build.gradle](build.gradle).
-
-### Adicionand extensão em sua IDE para suporte ao Lombok
-
-- **IntelliJ**
-  - Vá em `File->Settings->Plugins`
-  - Clique em `Browse repositories`
-  - Procure por `Lombok plugin` e instale
-  - Reinicie a IDE
-- **Visual Studio Code**
-  - Vá no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
+Neste exemplo foi feito uso da biblioteca [Lombok](https://projectlombok.org/), [veja mais detalhes aqui](../Readme.md#biblioteca-lombok).
 
 ## Executando o projeto
 

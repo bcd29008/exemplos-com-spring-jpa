@@ -30,22 +30,31 @@ Para cada um dos exemplos disponíveis neste repositório foi feito uso do [Spri
 
 O [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools) inclui um conjunto de ferramentas para tornar mais agradável a experiência de desenvolvimento. De forma resumida, ele irá reiniciar automaticamente a aplicação sempre que notar alguma alteração nos arquivos contidos no *classpath*. Se não desejar tal comportamento, então você pode remover o Spring Boot DevTools da lista de dependências no arquivo `build.gradle`.
 
-### Informando os dados para conexão no MySQL
+## Servidor MySQL
 
-O projeto criado na seção anterior terá o arquivo `src/main/java/resources/application.properties` onde são colocadas informações de configuração da aplicação, o que inclui, as informações de conexão com o banco de dados MySQL. Edite o arquivo e faça alterações nas seguintes propriedades:
-```properties
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_database
-spring.datasource.username=nome-do-usuario
-spring.datasource.password=senha-do-usuario
+Para executar esse exemplo é necessário que tenha um servidor MySQL disponível. Você subir um rapidamente dentro de contêiner com o Docker. Basta executar a linha abaixo:
 
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```bash
+docker run -d --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=senhaRoot -e MYSQL_DATABASE=bcd -e MYSQL_USER=aluno -e MYSQL_PASSWORD=aluno -e MYSQL_ROOT_HOST='%' --name meumysql mysql/mysql-server:latest
 ```
 
-Veja se a propriedade `spring.datasource.driver-class-name` está com o valor `com.mysql.cj.jdbc.Driver`. Caso não esteja, faça a correção no arquivo.
+Cabe lembrar que sempre que o contêiner for parado, ele será excluído (opção `--rm` no comando acima) e todos os dados serão perdidos. Se quiser que os dados continuem mesmo depois da parada e exclusão do contêiner, então passe o parâmetro `-v $(pwd)/db_data:/var/lib/mysql` que fará o mapeamento do diretório usado pelo MySQL no contêiner para um diretório no computador hospedeiro.
+
+### Configuração do Spring para conexão com o banco de dados MySQL
+
+O projeto criado na seção anterior terá o arquivo `src/main/java/resources/application.properties` onde são colocadas informações de configuração da aplicação, o que inclui, as informações de conexão com o banco de dados MySQL.
+
+Edite o arquivo e faça alterações nas seguintes propriedades:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/bcd
+spring.datasource.username=aluno
+spring.datasource.password=aluno
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+```
 
 
-### Próximos passos
+## Próximos passos
 
 Com o projeto criado e com as informações de conexão com MySQL definidas é hora de criar as classes Java contendo a lógica da sua aplicação. 
 
@@ -60,6 +69,12 @@ Com o projeto criado e com as informações de conexão com MySQL definidas é h
 2. [Relacionamento um-para-muitos](exemplo-02-um-para-muitos/)
 3. [Relacionamento muitos-para-muitos a partir de um banco de dados existente](exemplo-03-muitos-para-muitos/)
 4. [Relacionamento muitos-para-muitos - exemplo de uma Livraria](exemplo-04-muitos-para-muitos-livraria/)
+
+## Biblioteca Lombok
+
+A biblioteca [Lombok](https://projectlombok.org/) que tem por objetivo tornar a escrita de códigos Java mais ágil. Por exemplo, ao criar um POJO o desenvolvedor não precisará criar manualmente (mesmo que a IDE faça isso por ele) métodos `get`,  `set`, `toString`, construtores, etc. Tudo isso pode ser obtido de forma automática, em tempo de compilação, por meio de anotações Java.
+
+Para usar o Lombok é necessário [adicionar o plugin](https://plugins.gradle.org/plugin/io.freefair.lombok) na seção correspondente no arquivo `build.gradle` e a IDE precisa ter suporte ao Lombok. O IntelliJ já tem o plugin do Lombok ativo por padrão, porém o Visual Studio Code não tem. Sendo assim, se estiver com o Visual Studio Code clique no painel de extensões, procure por `lombok` e instale a extensão [Lombok Annotations Support for VS Code](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
 
 
 ## Referências

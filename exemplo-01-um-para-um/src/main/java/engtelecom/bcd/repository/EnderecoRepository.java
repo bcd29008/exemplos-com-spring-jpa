@@ -2,7 +2,7 @@ package engtelecom.bcd.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import engtelecom.bcd.entities.Endereco;
+import engtelecom.bcd.model.Endereco;
 
 /**
  * The goal of the Spring Data repository abstraction is to significantly reduce

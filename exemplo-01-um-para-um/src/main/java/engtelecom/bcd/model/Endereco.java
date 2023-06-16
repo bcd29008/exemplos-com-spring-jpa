@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -69,11 +69,19 @@ public class Endereco implements Serializable{
     private Pessoa pessoa;
 
     /**
-     * É obrigatório ter um construtor padrão, porém este pode ser protected.
+     * Por ser uma entidade, o JPA requer um construtor padrão, porém este pode ser protected.
      */
     protected Endereco() {
     }
 
+    /**
+     * Esse construtor é para facilitar a criação de objetos já com todos os atributos preenchidos
+     * @param rua
+     * @param cidade
+     * @param estado
+     * @param cep
+     * @param p
+     */
     public Endereco(String rua, String cidade, String estado, String cep, Pessoa p) {
         this.rua = rua;
         this.cidade = cidade;
@@ -81,6 +89,9 @@ public class Endereco implements Serializable{
         this.cep = cep;
         this.pessoa = p;
     }
+
+    // Os métodos abaixo são necessários e todos foram gerados com ajuda da IDE.
+    // O projeto Lombok (https://projectlombok.org) é uma alternativa para não ter que escrever explicitamente tais métodos
 
     public Integer getIdEndereco() {
         return idEndereco;
