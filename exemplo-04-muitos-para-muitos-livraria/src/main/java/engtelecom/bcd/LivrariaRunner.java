@@ -2,20 +2,21 @@ package engtelecom.bcd;
 
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import engtelecom.bcd.entities.Autor;
-import engtelecom.bcd.entities.Cliente;
-import engtelecom.bcd.entities.Dimensao;
-import engtelecom.bcd.entities.Edicao;
-import engtelecom.bcd.entities.EdicaoId;
-import engtelecom.bcd.entities.Editora;
-import engtelecom.bcd.entities.ItemDoPedido;
-import engtelecom.bcd.entities.Livro;
-import engtelecom.bcd.entities.Pedido;
 import engtelecom.bcd.enums.Idiomas;
 import engtelecom.bcd.enums.Situacao;
+import engtelecom.bcd.model.Autor;
+import engtelecom.bcd.model.Cliente;
+import engtelecom.bcd.model.Dimensao;
+import engtelecom.bcd.model.Edicao;
+import engtelecom.bcd.model.EdicaoId;
+import engtelecom.bcd.model.Editora;
+import engtelecom.bcd.model.ItemDoPedido;
+import engtelecom.bcd.model.Livro;
+import engtelecom.bcd.model.Pedido;
 import engtelecom.bcd.repositories.AutorRepository;
 import engtelecom.bcd.repositories.ClienteRepository;
 import engtelecom.bcd.repositories.EdicaoRepository;
@@ -41,18 +42,25 @@ import net.datafaker.Faker;
 public class LivrariaRunner implements CommandLineRunner {
 
     @NonNull
+    @Autowired
     private AutorRepository autorRepository;
     @NonNull
+    @Autowired
     private ClienteRepository clienteRepository;
     @NonNull
+    @Autowired
     private EdicaoRepository edicaoRepository;
     @NonNull
+    @Autowired
     private EditoraRepository editoraRepository;
     @NonNull
+    @Autowired
     private ItemDoPedidoRepository itemDoPedidoRepository;
     @NonNull
+    @Autowired
     private LivroRepository livroRepository;
     @NonNull
+    @Autowired
     private PedidoRepository pedidoRepository;
 
     private final Faker faker = new Faker();
@@ -138,6 +146,7 @@ public class LivrariaRunner implements CommandLineRunner {
 
     public void listandoDados() {
 
+        System.out.println(" ------ Todas as linhas de todas as tabelas ------ ");
         // Listando todas as linhas de todas as tabelas
         clienteRepository.findAll().forEach(System.out::println);
         editoraRepository.findAll().forEach(System.out::println);
@@ -145,19 +154,28 @@ public class LivrariaRunner implements CommandLineRunner {
         livroRepository.findAll().forEach(System.out::println);
         edicaoRepository.findAll().forEach(System.out::println);
         pedidoRepository.findAll().forEach(System.out::println);
+        System.out.println(" ------------------------------------------------- ");
 
     }
 
     public void alterandoSituacaoPedido() {
-        System.out.println("Antes de atualizar");
-        pedidoRepository.findAll().forEach(System.out::println);
+        System.out.println(" ------ Atualizando situação de pedido ----------- ");
+        
         var pedido = pedidoRepository.findById(1);
+        
         if (pedido.isPresent()) {
-            pedido.get().setSituacao(Situacao.APROVADO);
-            pedidoRepository.save(pedido.get());
+            var p = pedido.get(); // obtendo objeto do tipo Pedido
+
+            System.out.println("--------- Antes de atualizar --------- ");
+            System.out.println("Pedido: "+ p.getIdPedido());
+            System.out.println("Situação: " + p.getSituacao());
+            p.setSituacao(Situacao.APROVADO);
+            pedidoRepository.save(p);
+            System.out.println("\n--------- Depois de atualizar -------- ");
+            System.out.println("Pedido: "+ p.getIdPedido());
+            System.out.println("Situação: " + p.getSituacao());
         }
-        System.out.println("Depois de atualizar");
-        pedidoRepository.findAll().forEach(System.out::println);
+        System.out.println(" ------------------------------------------------- ");
     }
 
     @Override

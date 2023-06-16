@@ -1,9 +1,11 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,36 +14,40 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 @ToString(exclude = { "courses", "jobHistory" })
+@RequiredArgsConstructor
 
 @Entity
 public class Employee implements Serializable {
 
     @Id
+    @NonNull
     private Integer empno;
 
+    @NonNull
     private String surname;
+    @NonNull
     private String forenames;
+    @NonNull
     private Date dob;
+    @NonNull
     private String address;
+    @NonNull
     private String telno;
 
     @ManyToOne
     @JoinColumn(name = "depno", nullable = false)
+    @NonNull
     private Department department;
 
     @OneToMany(mappedBy = "employee")
-    private Set<JobHistory> jobHistory;
+    @Autowired
+    private List<JobHistory> jobHistory = new ArrayList<>();
 
     /**
      * A anotação ManyToMany ficará responsável por criar ou mapear a tabela no
@@ -71,16 +77,8 @@ public class Employee implements Serializable {
     }, inverseJoinColumns = {
             @JoinColumn(name = "courseno", referencedColumnName = "courseno", nullable = false, updatable = false)
     })
-    private Set<Course> courses = new HashSet<>();
+    @Autowired
+    private List<Course> courses = new ArrayList<>();
 
-    public Employee(Integer empno, String surname, String forenames, Date dob, String address, String telno,
-            Department department) {
-        this.empno = empno;
-        this.surname = surname;
-        this.forenames = forenames;
-        this.dob = dob;
-        this.address = address;
-        this.telno = telno;
-        this.department = department;
-    }
+    protected Employee(){}
 }

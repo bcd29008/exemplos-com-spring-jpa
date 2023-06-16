@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.sql.Date;

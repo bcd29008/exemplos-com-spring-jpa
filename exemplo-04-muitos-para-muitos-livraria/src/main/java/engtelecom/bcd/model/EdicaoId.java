@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -17,6 +17,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Embeddable
+/**
+ * Classe criada para ser usada pela classe Edicao que necessita de uma chave primária composta por duas colunas
+ */
 public class EdicaoId implements Serializable {
 
     private Integer numero;

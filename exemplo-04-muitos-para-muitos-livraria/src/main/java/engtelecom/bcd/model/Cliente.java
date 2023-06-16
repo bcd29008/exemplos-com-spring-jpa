@@ -1,9 +1,11 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,9 +27,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = { "pedidos", "eR" })
 @RequiredArgsConstructor
-@ToString(exclude = { "pedidos", "eR" })
+@EqualsAndHashCode(exclude = { "pedidos", "ER_EMAIL" })
+@ToString(exclude = { "pedidos", "ER_EMAIL" })
 @Entity
 public class Cliente implements Serializable{
 
@@ -38,7 +40,7 @@ public class Cliente implements Serializable{
      * ela
      */
     @Transient
-    private final String eR = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+    private final String ER_EMAIL = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,8 +60,9 @@ public class Cliente implements Serializable{
     @NonNull
     private Date dataNascimento;
 
+    @Autowired
     @OneToMany(mappedBy = "cliente")
-    private Set<Pedido> pedidos = new HashSet<>();
+    private List<Pedido> pedidos = new ArrayList<>();
 
     /**
      * Para demonstrar que aqui se deseja implementar manualmente o método setEmail
@@ -76,6 +79,6 @@ public class Cliente implements Serializable{
      * @param email endereço de email
      */
     public void setEmail(String email) {
-        this.email = (email.matches(eR)) ? email : "";
+        this.email = (email.matches(ER_EMAIL)) ? email : "";
     }
 }

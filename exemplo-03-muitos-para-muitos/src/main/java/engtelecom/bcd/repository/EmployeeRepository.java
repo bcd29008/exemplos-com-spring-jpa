@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import engtelecom.bcd.entities.Employee;
-import engtelecom.bcd.entities.JobHistory;
+import engtelecom.bcd.model.Employee;
+import engtelecom.bcd.model.JobHistory;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 

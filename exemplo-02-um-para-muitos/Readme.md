@@ -41,7 +41,7 @@ int countByCampus(Campus campus)
 ```
 ## Spring Data REST
 
-Para esse exemplo faremos uso do [Spring Data REST](https://docs.spring.io/spring-data/rest/docs/current/reference/html) que permite facilmente criar recursos REST com base nos [repositórios](src/main/java/engtelecom/bcd/repository) usados para interagir com as [entidades](src/main/java/engtelecom/bcd/entities). Sendo assim, foi necessário adicionar a seguinte linha na seção de dependências do arquivo [build.gradle](build.gradle):
+Para esse exemplo faremos uso do [Spring Data REST](https://docs.spring.io/spring-data/rest/docs/current/reference/html) que permite facilmente criar recursos REST com base nos [repositórios](src/main/java/engtelecom/bcd/repository) usados para interagir com as [entidades](src/main/java/engtelecom/bcd/model). Sendo assim, foi necessário adicionar a seguinte linha na seção de dependências do arquivo [build.gradle](build.gradle):
 ```groovy
 implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 ```

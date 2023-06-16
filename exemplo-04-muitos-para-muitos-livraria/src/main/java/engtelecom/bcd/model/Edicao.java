@@ -1,9 +1,11 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -25,13 +27,22 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "capa", "pedidos" })
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = { "capa", "pedidos" })
 @ToString
 @Entity
 public class Edicao implements Serializable {
 
+    /**
+     * A chave primária é composta por duas colunas. Assim, foi criada uma classe EdicaoId
+     * para representar a chave primária e aqui foi feito uso da anotação @EmbeddedId
+     * 
+     * @see engtelecom.bcd.repositories.EdicaoRepository, pois ao herdar a interface
+     * CrudRepository<Edicao, EdicaoId> é necessário informar sempre o nome da entidade
+     * e o tipo da chave primária, no caso como a chave é composta, esse tipo precisa ser
+     * uma classe
+     */
     @NonNull
     @EmbeddedId
     private EdicaoId idEdicao;
@@ -72,6 +83,11 @@ public class Edicao implements Serializable {
     @JoinColumn(name = "id_livro", nullable = false)
     private Livro livro;
 
+    /**
+     * O valor 'edicao' em mappedBy deve ser exatamente o nome do atributo na classe ItemDoPedido que tenha
+     * a anotação ManyToOne
+     */
+    @Autowired
     @OneToMany(mappedBy = "edicao", fetch = FetchType.EAGER)
-    public Set<ItemDoPedido> pedidos = new HashSet<>();;
+    public List<ItemDoPedido> pedidos = new ArrayList<>();
 }

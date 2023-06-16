@@ -1,7 +1,10 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,9 +22,9 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "livros" })
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = { "livros" })
 @ToString(exclude = { "livros" })
 @Entity
 public class Editora implements Serializable {
@@ -39,9 +42,13 @@ public class Editora implements Serializable {
 
     /**
      * Fazendo o mapeamento bidirecional. Assim, a partir de uma editora é possível
-     * ver todos livros que ela publicou
+     * ver todos livros que ela publicou.
+     * 
+     * O nome 'editora' deve ser exatamente igual ao nome do atributo na classe Edicao
+     * que esteja anotado com ManyToOne
      */
+    @Autowired
     @OneToMany(mappedBy = "editora")
-    private Set<Edicao> livros;
+    private List<Edicao> livros = new ArrayList<>();
 
 }

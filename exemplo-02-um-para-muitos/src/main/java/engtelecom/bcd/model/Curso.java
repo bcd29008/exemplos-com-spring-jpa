@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -9,11 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * POJO para representar a entidade Curso
@@ -32,11 +28,15 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
+@RequiredArgsConstructor
 
 @Entity
 @Table(name = "Curso")
 public class Curso implements Serializable{
+    /**
+     * JPA exige construtor padrão
+     */
+    protected Curso(){}
 
     /**
      * A anotação Id indica que o atributo é a chave primária da entidade
@@ -47,8 +47,10 @@ public class Curso implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCurso;
 
+    @NonNull
     private String nome;
-    private int    cargaHoraria;
+    @NonNull
+    private int cargaHoraria;
 
 
     /**
@@ -59,15 +61,6 @@ public class Curso implements Serializable{
      */
     @ManyToOne
     @JoinColumn(name = "idCampus", nullable = false)
+    @NonNull
     private Campus campus;
-
-
-    public Curso(String nome, int cargaHoraria, Campus campus) {
-        this.nome = nome;
-        this.cargaHoraria = cargaHoraria;
-        this.campus = campus;
-    }
-
-    
-
 }

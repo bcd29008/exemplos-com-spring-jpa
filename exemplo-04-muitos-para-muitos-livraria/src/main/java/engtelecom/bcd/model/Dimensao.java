@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -18,6 +18,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Embeddable
+/**
+ * A anotação @Embeddable indica que essa classe é para ser embarcada em outra e assim, não deverá criar
+ * uma tabela no banco. Os atributos dessa classe serão mesclados com os atributos da classe (entidade) que a contiver
+ */
 public class Dimensao implements Serializable {
 
     @Column(nullable = false)

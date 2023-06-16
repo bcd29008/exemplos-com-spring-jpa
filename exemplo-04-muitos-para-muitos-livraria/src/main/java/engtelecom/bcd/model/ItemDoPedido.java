@@ -1,4 +1,4 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
 
@@ -16,6 +16,9 @@ import lombok.ToString;
 
 /**
  * A anotação IdClass indica qual classe deverá ser usada para construir a chave primária. Esta situação só é necessário em relacionamentos muitos-para-muitos, com chave primária composta e quando se deseja ter atributos adicionais nesta entidade. Existem outras maneiras para fazer isso, por exemplo, criar um atributo específico para ser chave primária e evitar que as chaves estrangeiras façam parte da chave primária
+ * 
+ * Nomes dos atributos anotados com @Id devem corresponder com os nomes dos atributos na classe indicada na anotação @IdClass
+ * 
  */
 @NoArgsConstructor
 @Getter

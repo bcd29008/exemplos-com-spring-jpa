@@ -1,6 +1,6 @@
 package engtelecom.bcd;
 
-import engtelecom.bcd.entities.*;
+import engtelecom.bcd.model.*;
 import engtelecom.bcd.repositories.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

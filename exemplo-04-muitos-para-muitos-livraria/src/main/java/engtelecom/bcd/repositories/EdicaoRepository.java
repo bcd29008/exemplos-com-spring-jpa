@@ -2,8 +2,8 @@ package engtelecom.bcd.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import engtelecom.bcd.entities.Edicao;
-import engtelecom.bcd.entities.EdicaoId;
+import engtelecom.bcd.model.Edicao;
+import engtelecom.bcd.model.EdicaoId;
 
 public interface EdicaoRepository extends CrudRepository<Edicao, EdicaoId> {
 

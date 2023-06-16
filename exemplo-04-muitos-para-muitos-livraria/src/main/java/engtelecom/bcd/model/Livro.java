@@ -1,8 +1,10 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import engtelecom.bcd.enums.Idiomas;
 import jakarta.persistence.Column;
@@ -26,9 +28,9 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "autores", "edicoes" })
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude = { "autores", "edicoes" })
 @ToString(exclude = { "edicoes" })
 @Entity
 public class Livro implements Serializable {
@@ -60,14 +62,19 @@ public class Livro implements Serializable {
 
     @NonNull
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Autor> autores = new HashSet<>();
+    @Autowired
+    private List<Autor> autores = new ArrayList<>();
 
     /**
      * Fazendo o mapeamento bidirecional. Assim, a partir de um livro é possível ver
      * todas as edições
+     * 
+     * O valor 'livro' em mappedBy deve ser exatamente o nome do atributo na classe Edicao que tenha
+     * a anotação ManyToOne
      */
     @OneToMany(mappedBy = "livro")
-    private Set<Edicao> edicoes = new HashSet<>();
+    @Autowired
+    private List<Edicao> edicoes = new ArrayList<>();
 
     public boolean adicionarEdicao(Edicao edicao) {
         return this.edicoes.add(edicao);

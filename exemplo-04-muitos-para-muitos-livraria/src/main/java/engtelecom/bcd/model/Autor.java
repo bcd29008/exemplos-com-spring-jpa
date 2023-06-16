@@ -1,8 +1,10 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,23 +22,23 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "livros" })
 @NoArgsConstructor
 @RequiredArgsConstructor
 @ToString(exclude = { "livros" })
+@EqualsAndHashCode(exclude = { "livros" })
 @Entity
 public class Autor implements Serializable {
 
-    /**
-     * A anotação NonNull é usada pela biblioteca lombok para determinar quais
-     * atributos deverão fazer parte do construtor que será gerado com a anotação
-     * RequiredArgsConstructor
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAutor;
 
     /**
+     * 
+     * A anotação NonNull é usada pela biblioteca lombok para determinar quais
+     * atributos deverão fazer parte do construtor que será gerado com a anotação
+     * RequiredArgsConstructor
+     * 
      * Anotação column indica que a coluna no banco de dados não permite valores
      * nulos
      */
@@ -51,9 +53,15 @@ public class Autor implements Serializable {
     /**
      * Fazendo o mapeamento bidirecional. Assim, a partir de um autor é possível ver
      * os livros que publicou
+     * 
+     * O valor na propriedade mappedBy deve ser exatamente o nome do atributo da
+     * classe Livro
+     * que possui a anotação ManyToMany
+     * 
      */
+    @Autowired
     @ManyToMany(mappedBy = "autores")
-    private Set<Livro> livros = new HashSet<>();
+    private List<Livro> livros = new ArrayList<>();
 
     public boolean adicionarLivro(Livro livro) {
         return livros.add(livro);

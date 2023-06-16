@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import engtelecom.bcd.entities.Course;
+import engtelecom.bcd.model.Course;
 
 public interface CourseRepository extends CrudRepository<Course, Integer> {
 

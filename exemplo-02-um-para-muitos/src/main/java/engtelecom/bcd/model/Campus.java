@@ -1,7 +1,10 @@
-package engtelecom.bcd.entities;
+package engtelecom.bcd.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,11 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * POJO para representar a entidade Campus. 
@@ -26,10 +25,15 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString(exclude = {"cursos"})
-@NoArgsConstructor
+@RequiredArgsConstructor
 
 @Entity
 public class Campus implements Serializable{
+
+    /**
+     * JPA exige construtor padrão
+     */
+    protected Campus(){}
     
     /**
      * A anotação Id indica que o atributo é a chave primária da entidade
@@ -45,21 +49,27 @@ public class Campus implements Serializable{
      * na tabela (name) e se não será permitido valor nulo na coluna
      */
     @Column(nullable = false)
+    @NonNull
     private String nome;
-    
+
+    /**
+     * Não pode existir mais de um campus com a mesma sigla. Será criada restrição UNIQUE no banco de dados
+     */
     @Column(nullable = false, unique = true)
+    @NonNull
     private String sigla;
 
+    @NonNull
     private String endereco;
 
+    @NonNull
     private String cidade;
 
     
     /**
      * A anotação OneToMany indica o relacionamento desta entidade com a entidade Curso. No caso, UM campus pode estar associado com MUITOS cursos.
      * 
-     * Em relacionamento bidirecionais é necessário especificar esta anotação em ambas as entidades (como foi feito neste exemplo), porém somente uma das entidades será a dona da associação (indicada pela propriedade mappedBy). Em mappedBy coloca-se o identificador do mapeamento que deverá aparecer como atributo
-     * da classe Curso
+     * Em relacionamento bidirecionais é necessário especificar esta anotação em ambas as entidades (como foi feito neste exemplo), porém somente uma das entidades será a dona da associação (indicada pela propriedade mappedBy). Em mappedBy coloca-se o identificador do mapeamento que deverá aparecer como atributo da classe Curso
      * 
      * Atributo cascade (boa prática de pai para filho apenas) pode assumir alguns valores (CascadeType.ALL ativa todos). Detalhes de alguns:
      * CascadeType.PERSIST - entidades filhas serão persistidas assim que a entidade pai for persistida no banco de dados
@@ -67,23 +77,9 @@ public class Campus implements Serializable{
      * CascadeType.REMOVE - ao excluir a entidade pai, a entidade filha também é excluída
      * CascadeType.REFRESH - ao atualizar a entidade pai a partir do banco de dados, a entidade filha também é atualizada a partir do banco
      * 
-     * 
+     * O valor em mappeBy deve ser exatamente igual ao nome do atributo da classe Curso que tem a anotação ManyToOne
      */
     @OneToMany(mappedBy = "campus", cascade = {CascadeType.ALL})
-    private List<Curso> cursos;
-
-    /**
-     * Construtor para criar uma entidade Campus. Não é necessário informar o id, pois este será 
-     * gerado pelo AUTOINCREMENT
-     * @param nome nome do campus
-     * @param sigla sigla do campus
-     * @param endereco nome da rua e número
-     * @param cidade nome da cidade
-     */
-    public Campus(String nome, String sigla, String endereco, String cidade) {
-        this.nome = nome;
-        this.sigla = sigla;
-        this.endereco = endereco;
-        this.cidade = cidade;
-    }
+    @Autowired
+    private List<Curso> cursos = new ArrayList<>();
 }

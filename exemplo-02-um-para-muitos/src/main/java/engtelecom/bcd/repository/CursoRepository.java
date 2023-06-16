@@ -8,8 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import engtelecom.bcd.entities.Campus;
-import engtelecom.bcd.entities.Curso;
+import engtelecom.bcd.model.Campus;
+import engtelecom.bcd.model.Curso;
 
 
 /**
