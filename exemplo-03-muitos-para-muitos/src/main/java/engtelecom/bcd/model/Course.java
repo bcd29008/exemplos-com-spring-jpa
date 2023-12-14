@@ -1,16 +1,13 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import lombok.*;
+
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,7 +15,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @ToString(exclude = { "employees" })
 @Entity
-public class Course implements Serializable {
+public class Course {
 
     @Id
     @NonNull
@@ -36,8 +33,7 @@ public class Course implements Serializable {
      * Employee.
      */
     @ManyToMany(mappedBy = "courses")
-    @Autowired
-    private List<Employee> employees = new ArrayList<>();
+    private Set<Employee> employees = new HashSet<>();
 
     protected Course(){}
 }

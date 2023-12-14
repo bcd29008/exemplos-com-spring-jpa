@@ -3,7 +3,9 @@ package engtelecom.bcd.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -60,9 +62,8 @@ public class Cliente implements Serializable{
     @NonNull
     private Date dataNascimento;
 
-    @Autowired
     @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos = new ArrayList<>();
+    private Set<Pedido> pedidos = new HashSet<>();
 
     /**
      * Para demonstrar que aqui se deseja implementar manualmente o método setEmail

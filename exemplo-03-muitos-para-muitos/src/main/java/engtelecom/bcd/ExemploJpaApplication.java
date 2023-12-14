@@ -23,16 +23,15 @@ import engtelecom.bcd.repository.EmployeeRepository;
 @SpringBootApplication
 public class ExemploJpaApplication {
 
+    // O uso de Logger é uma boa prática para registrar informações de depuração,
+    // erro, etc.
+    private static final Logger log = LoggerFactory.getLogger(ExemploJpaApplication.class);
     @Autowired
     CourseRepository courseRepository;
     @Autowired
     DepartmentRepository departmentRepository;
     @Autowired
     EmployeeRepository employeeRepository;
-
-    // O uso de Logger é uma boa prática para registrar informações de depuração,
-    // erro, etc.
-    private static final Logger log = LoggerFactory.getLogger(ExemploJpaApplication.class);
 
     public static void main(String[] args) {
         // Método run para executar a aplicação. É necessário passar como parâmetro uma
@@ -83,7 +82,7 @@ public class ExemploJpaApplication {
                         sb.append(String.format("|%-10s|%-10s|%-40s|\n", cargo.getStartdate(), cargo.getEnddate(),
                                 cargo.getPosition()));
                     });
-                    System.out.println(sb.toString());
+                    System.out.println(sb);
 
                 }
 

@@ -1,20 +1,14 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,7 +17,7 @@ import lombok.*;
 @RequiredArgsConstructor
 
 @Entity
-public class Employee implements Serializable {
+public class Employee {
 
     @Id
     @NonNull
@@ -46,8 +40,7 @@ public class Employee implements Serializable {
     private Department department;
 
     @OneToMany(mappedBy = "employee")
-    @Autowired
-    private List<JobHistory> jobHistory = new ArrayList<>();
+    private Set<JobHistory> jobHistory = new HashSet<>();
 
     /**
      * A anotação ManyToMany ficará responsável por criar ou mapear a tabela no

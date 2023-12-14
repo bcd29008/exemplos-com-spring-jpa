@@ -1,20 +1,9 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-import java.sql.Date;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -25,7 +14,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "jobhistory")
-public class JobHistory implements Serializable {
+public class JobHistory {
 
     @Id
     private String position;

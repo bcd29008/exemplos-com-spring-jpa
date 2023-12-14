@@ -1,15 +1,12 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +14,7 @@ import lombok.*;
 @ToString(exclude = "employees")
 @RequiredArgsConstructor
 @Entity
-public class Department implements Serializable {
+public class Department {
 
     @Id
     @NonNull
@@ -31,8 +28,7 @@ public class Department implements Serializable {
     private Integer head;
 
     @OneToMany(mappedBy = "department")
-    @Autowired
-    private List<Employee> employees = new ArrayList<>();
+    private Set<Employee> employees = new HashSet<>();
 
     protected Department(){}
 }

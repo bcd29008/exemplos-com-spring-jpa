@@ -1,7 +1,5 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ import jakarta.persistence.OneToOne;
  * para você ou faça uso do projeto Lombok (https://projectlombok.org).
  */
 @Entity
-public class Endereco implements Serializable{
+public class Endereco{
 
     /**
      * A anotação Id indica que o atributo é a chave primária da entidade

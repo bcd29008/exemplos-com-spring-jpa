@@ -1,19 +1,11 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * POJO para representar a entidade Campus. 
@@ -80,6 +72,5 @@ public class Campus implements Serializable{
      * O valor em mappeBy deve ser exatamente igual ao nome do atributo da classe Curso que tem a anotação ManyToOne
      */
     @OneToMany(mappedBy = "campus", cascade = {CascadeType.ALL})
-    @Autowired
-    private List<Curso> cursos = new ArrayList<>();
+    private Set<Curso> cursos = new HashSet<>();
 }

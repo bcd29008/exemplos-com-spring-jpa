@@ -3,7 +3,9 @@ package engtelecom.bcd.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,7 +58,6 @@ public class Pedido implements Serializable{
      * a anotação ManyToOne
      */
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
-    @Autowired
-    public List<ItemDoPedido> itens = new ArrayList<>();
+    public Set<ItemDoPedido> itens = new HashSet<>();
 
 }

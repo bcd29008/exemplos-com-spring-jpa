@@ -2,7 +2,9 @@ package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,8 +49,7 @@ public class Editora implements Serializable {
      * O nome 'editora' deve ser exatamente igual ao nome do atributo na classe Edicao
      * que esteja anotado com ManyToOne
      */
-    @Autowired
     @OneToMany(mappedBy = "editora")
-    private List<Edicao> livros = new ArrayList<>();
+    private Set<Edicao> livros = new HashSet<>();
 
 }

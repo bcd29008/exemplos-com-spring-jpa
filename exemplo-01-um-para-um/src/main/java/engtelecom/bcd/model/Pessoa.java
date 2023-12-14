@@ -1,7 +1,5 @@
 package engtelecom.bcd.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +25,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "Pessoa")
-public class Pessoa implements Serializable {
+public class Pessoa {
 
     /**
      * A anotação Id indica que o atributo é a chave primária da entidade

@@ -3,7 +3,9 @@ package engtelecom.bcd.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -87,7 +89,6 @@ public class Edicao implements Serializable {
      * O valor 'edicao' em mappedBy deve ser exatamente o nome do atributo na classe ItemDoPedido que tenha
      * a anotação ManyToOne
      */
-    @Autowired
     @OneToMany(mappedBy = "edicao", fetch = FetchType.EAGER)
-    public List<ItemDoPedido> pedidos = new ArrayList<>();
+    public Set<ItemDoPedido> pedidos = new HashSet<>();
 }

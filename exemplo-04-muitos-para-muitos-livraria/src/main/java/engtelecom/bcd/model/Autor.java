@@ -2,7 +2,9 @@ package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,9 +61,8 @@ public class Autor implements Serializable {
      * que possui a anotação ManyToMany
      * 
      */
-    @Autowired
     @ManyToMany(mappedBy = "autores")
-    private List<Livro> livros = new ArrayList<>();
+    private Set<Livro> livros = new HashSet<>();
 
     public boolean adicionarLivro(Livro livro) {
         return livros.add(livro);

@@ -2,7 +2,9 @@ package engtelecom.bcd.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -62,8 +64,7 @@ public class Livro implements Serializable {
 
     @NonNull
     @ManyToMany(fetch = FetchType.EAGER)
-    @Autowired
-    private List<Autor> autores = new ArrayList<>();
+    private Set<Autor> autores = new HashSet<>();
 
     /**
      * Fazendo o mapeamento bidirecional. Assim, a partir de um livro é possível ver
@@ -73,8 +74,7 @@ public class Livro implements Serializable {
      * a anotação ManyToOne
      */
     @OneToMany(mappedBy = "livro")
-    @Autowired
-    private List<Edicao> edicoes = new ArrayList<>();
+    private Set<Edicao> edicoes = new HashSet<>();
 
     public boolean adicionarEdicao(Edicao edicao) {
         return this.edicoes.add(edicao);
